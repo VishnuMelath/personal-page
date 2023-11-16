@@ -592,7 +592,7 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<input type="submit" id="submit">
+													<input type="submit" id="submit" onclick="ValidateEmail()">
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -692,23 +692,51 @@
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
 		<script>
-			$("#submit-form").submit((e)=>{
-				e.preventDefault()
-				$.ajax({
-					url:"https://script.google.com/macros/s/AKfycbwOBo9p5WOX_BYXssEjPy7aaYgCB6mwAkdgoWlKUuDgSzpJt5mj9olPYyYoy8TCXLjbUA/exec",
-					data:$("#submit-form").serialize(),
-					method:"post",
-					success:function (response){
-						alert("Form submitted successfully")
-						window.location.reload()
-						//window.location.href="https://google.com"
-					},
-					error:function (err){
-						alert("Something Error")
-		
-					}
+			function ValidateEmail() 
+			{
+				var name=document.getElementById("name").value;
+				var subject=document.getElementById("name").value;
+				var comment=document.getElementById("name").value;
+				if (document.getElementById("name").value.trim() == "") {
+					alert("Please enter Name!");
+				}
+				else if (document.getElementById("email").value.trim() == "") {
+					alert("Please enter email!");
+				}
+				else if (document.getElementById("subject").value.trim() == "") {
+					alert("Please enter subject!");
+				}
+				else if (document.getElementById("comment").value.trim() == "") {
+					alert("Please enter comment!");
+				}
+			 else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value))
+			  {
+				$("#submit-form").submit((e)=>{
+					e.preventDefault()
+					$.ajax({
+						url:"https://script.google.com/macros/s/AKfycbwOBo9p5WOX_BYXssEjPy7aaYgCB6mwAkdgoWlKUuDgSzpJt5mj9olPYyYoy8TCXLjbUA/exec",
+						data:$("#submit-form").serialize(),
+						method:"post",
+						success:function (response){
+							alert("Form submitted successfully")
+							window.location.reload()
+							//window.location.href="https://google.com"
+						},
+						error:function (err){
+							alert("Something Error")
+			
+						}
+					})
 				})
-			})
+			  }
+			  else
+			  {
+				alert("You have entered an invalid email address!")
+			  }
+				
+			}
+
+			
 		</script>
         
     </body>
