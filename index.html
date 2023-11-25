@@ -477,7 +477,7 @@
 
 								<div class="col-sm-4">
 									<div class="item">
-										<img src="assets/images/portfolio/p3.jpg" alt="portfolio image"/>
+										<img src="assets/images/portfolio/web.jpeg" alt="portfolio image"/>
 										<div class="isotope-overlay">
 											<a href="#">
 												web design
@@ -567,18 +567,22 @@
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
 												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name">
+												  <p id="namealert" style="color: red;"></p>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
 													<input type="email" class="form-control" id="email" placeholder="Email*" name="email">
-												</div><!--/.form-group-->
+													<p id="emailalert" style="color: red;"></p>
+												</div>
+												<p id="emailalert" style="color: red;"></p><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
 													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
+													<p id="subjectalert" style="color: red;"></p>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -586,13 +590,14 @@
 											<div class="col-sm-12">
 												<div class="form-group">
 													<textarea class="form-control" rows="8" id="comment" placeholder="Message" ></textarea>
+													<p id="commentalert" style="color: red;"></p>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<input type="submit" id="submit" onclick="ValidateEmail()">
+													<input type="submit" id="submit" onclick="validation()">
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -653,9 +658,167 @@
 				
 			</div><!--/.scroll-Top-->
 			
-        </footer><!--/.footer-copyright-->
-		<!--footer-copyright end-->
+        </footer>
 		
+		<!--/.footer-copyright-->
+		<!--footer-copyright end-->
+		<!-- <script>
+			var form=document.getElementById("submit-form");
+			function submitForm(event){
+				event.preventDefault();
+			  }
+		 form.addEventListener('submit', submitForm);
+			function ValidateEmail() 
+			{
+				var flag=0;
+				let result=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(document.getElementById("email").value);
+
+				var flag=0;
+				if(document.getElementById("email").value=="")
+				{
+				  document.getElementById("mailalert").innerHTML="email cannot be empty";
+				  flag=1;
+				}
+				else if(!result) 
+				{
+				  document.getElementById("mailalert").innerHTML="enter a valid email";
+				  flag=1;
+				}
+				else {
+				  document.getElementById("mailalert").innerHTML="";
+				  flag=0;
+				}
+				if(document.getElementById("name").value=="")
+				{
+				  document.getElementById("namealert").innerHTML="name cannot be empty";
+				  flag=1;
+				}
+				else {
+				  document.getElementById("namealert").innerHTML="";
+				  flag=0;
+				}
+				if(document.getElementById("message").value=="")
+				{
+				  document.getElementById("messagealert").innerHTML="message cannot be empty";
+				  flag=1;
+				}
+				else {
+				  document.getElementById("messagealert").innerHTML="";
+				  flag=0;
+				}
+				if(document.getElementById("comment").value=="")
+				{
+				  document.getElementById("commentalert").innerHTML="message cannot be empty";
+				  flag=1;
+				}
+				else {
+				  document.getElementById("commentalert").innerHTML="";
+				  flag=0;
+				}
+			  if(flag==0)
+			  {
+				$("#submit-form").submit((e)=>{
+					e.preventDefault()
+					$.ajax({
+						url:"https://script.google.com/macros/s/AKfycbx8OT_f4u7AIKyo_v9gH7MpLjXayfGY0En4isCzL-XHMP8XjHTLtYKv75_ZiQDf3qZiYQ/exec",
+						data:$("#submit-form").serialize(),
+						method:"post",
+						success:function (response){
+							alert("Form submitted successfully")
+							window.location.reload()
+							//window.location.href="https://google.com"
+						},
+						error:function (err){
+							alert("Something Error")
+			
+						}
+					})
+				})
+			  }
+				
+			}
+
+			
+		</script> -->
+		<script>
+			var form=document.getElementById("submit-form");
+			function submitForm(event){
+				event.preventDefault();
+			  }
+		form.addEventListener('submit', submitForm);
+		
+			function validation()
+			{
+				
+
+			  let result=/^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/.test(document.getElementById("email").value);
+		
+			var flag=0;
+			if(document.getElementById("email").value=="")
+			{
+			  document.getElementById("emailalert").innerHTML="email cannot be empty";
+			  flag=1;
+			}
+			else if(!result) 
+			{
+			  document.getElementById("emailalert").innerHTML="enter a valid email";
+			  flag=1;
+			}
+			else {
+			  document.getElementById("emailalert").innerHTML="";
+			  flag=flag+1;
+			}
+			if(document.getElementById("name").value=="")
+			{
+			  document.getElementById("namealert").innerHTML="name cannot be empty";
+			  flag=1;
+			}
+			else {
+			  document.getElementById("namealert").innerHTML="";
+			  flag=flag+1;
+			}
+			if(document.getElementById("subject").value=="")
+			{
+			  document.getElementById("subjectalert").innerHTML="message cannot be empty";
+			  flag=1;
+			}
+			else {
+			  document.getElementById("subjectalert").innerHTML="";
+			  flag=flag+1;
+			}
+			if(document.getElementById("comment").value=="")
+			{
+			  document.getElementById("commentalert").innerHTML="message cannot be empty";
+			  flag=1;
+			}
+			else {
+			  document.getElementById("commentalert").innerHTML="";
+			  flag=flag+1;
+			}
+			if(flag==4)
+			{
+			  $("#submit-form").submit((e)=>{
+				e.preventDefault()
+				$.ajax({
+					url:"https://script.google.com/macros/s/AKfycbx8OT_f4u7AIKyo_v9gH7MpLjXayfGY0En4isCzL-XHMP8XjHTLtYKv75_ZiQDf3qZiYQ/exec",
+					data:$("#submit-form").serialize(),
+					method:"post",
+					success:function (response){
+						alert("Form submitted successfully")
+						window.location.reload()
+						//window.location.href="https://google.com"
+					},
+					error:function (err){
+						alert("Something Error")
+		
+					}
+				})
+			})
+			}
+		  
+		  }
+			
+		</script>
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
 		<script src="assets/js/jquery.js"></script>
@@ -691,53 +854,7 @@
         
         <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
-		<script>
-			function ValidateEmail() 
-			{
-				var name=document.getElementById("name").value;
-				var subject=document.getElementById("name").value;
-				var comment=document.getElementById("name").value;
-				if (document.getElementById("name").value.trim() == "") {
-					alert("Please enter Name!");
-				}
-				else if (document.getElementById("email").value.trim() == "") {
-					alert("Please enter email!");
-				}
-				else if (document.getElementById("subject").value.trim() == "") {
-					alert("Please enter subject!");
-				}
-				else if (document.getElementById("comment").value.trim() == "") {
-					alert("Please enter comment!");
-				}
-			 else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value))
-			  {
-				$("#submit-form").submit((e)=>{
-					e.preventDefault()
-					$.ajax({
-						url:"https://script.google.com/macros/s/AKfycbwOBo9p5WOX_BYXssEjPy7aaYgCB6mwAkdgoWlKUuDgSzpJt5mj9olPYyYoy8TCXLjbUA/exec",
-						data:$("#submit-form").serialize(),
-						method:"post",
-						success:function (response){
-							alert("Form submitted successfully")
-							window.location.reload()
-							//window.location.href="https://google.com"
-						},
-						error:function (err){
-							alert("Something Error")
-			
-						}
-					})
-				})
-			  }
-			  else
-			  {
-				alert("You have entered an invalid email address!")
-			  }
-				
-			}
-
-			
-		</script>
+		
         
     </body>
 	
